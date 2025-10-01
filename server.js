@@ -3,6 +3,7 @@ import cors from "cors";
 import fetch from "node-fetch";
 import dotenv from "dotenv";
 
+// Load environment variables
 dotenv.config();
 
 const app = express();
