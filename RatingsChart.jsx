@@ -9,17 +9,13 @@ export default function RatingsChart({ ratings }) {
     let value = r.Value;
 
     if (value.includes("%")) {
-      // Rotten Tomatoes (e.g. "87%")
       value = parseInt(value);
     } else if (value.includes("/10")) {
-      // IMDb (e.g. "8.8/10")
       value = parseFloat(value) * 10;
     } else if (value.includes("/")) {
-      // Metacritic or any fraction (e.g. "73/100", "730/100", "730/1000")
       const [num, denom] = value.split("/").map((x) => parseFloat(x.trim()));
       value = denom && !isNaN(num) ? (num / denom) * 100 : 0;
 
-      // Fix OMDb bug where they sometimes send "730/100" instead of "73/100"
       if (value > 100) value = value / 10;
     } else {
       value = parseInt(value) || 0;
@@ -39,4 +35,5 @@ export default function RatingsChart({ ratings }) {
       </BarChart>
     </ResponsiveContainer>
   );
+
 }
